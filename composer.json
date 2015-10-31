@@ -1,0 +1,6 @@
+{
+  "require": {
+    "videlalvaro/php-amqplib": "2.2.*",
+    "swiftmailer/swiftmailer": "@stable"
+  }
+}
