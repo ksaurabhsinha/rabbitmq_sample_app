@@ -1,6 +1,6 @@
 <?php
 
-//Set the default timezone to UTC
+//Set the default timezone to UTC - Please change this to UTC on PROD
 date_default_timezone_set('Asia/Kolkata');
 
 require_once('app/Autoloader.php');     //This is the Autoloader for the Application level Classes
