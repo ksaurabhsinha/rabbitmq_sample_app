@@ -15,9 +15,15 @@ $channel = $objRabbitMQ->declareQueue('messages');
 
 $messageCounter = 1;
 
+$objSwiftTransport = Swift_SmtpTransport::newInstance(MAILTRAP_HOST, MAILTRAP_PORT)
+                                        ->setUsername(MAILTRAP_USERNAME)
+                                        ->setPassword(MAILTRAP_PASSWORD);
+$objSwiftMailer = Swift_Mailer::newInstance($objSwiftTransport);
+
 function processMessage($msg){
 
-    global $messageCounter;
+    global $messageCounter, $objSwiftMailer;
+
     echo "Processing Message Number = $messageCounter. Press CTRL+C to stop processing\n";
 
     $messageCounter++;
@@ -29,9 +35,19 @@ function processMessage($msg){
 
             if($dataArray['type'] == 'email'){
 
-                //Send the email to the specific email address
-                writeLog($dataArray, 'processed_email_at_valid_time.log');
+                // Create a message
+                $message = Swift_Message::newInstance('Sample Subject')
+                                            ->setFrom(array($dataArray['from']))
+                                            ->setTo($dataArray['recipients'])
+                                            ->setBody($dataArray['html'], 'multipart/alternative')
+                                            ->addPart($dataArray['html'], 'text/html')
+                                            ->addPart($dataArray['text'], 'text/plain');
+                ;
 
+                // Send the message
+                $objSwiftMailer->send($message);
+
+                //writeLog($result, LOG_FOR_EMAIL_SENT);
 
             }
             else if ($dataArray['type'] = 'sms') {

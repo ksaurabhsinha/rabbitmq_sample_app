@@ -26,5 +26,6 @@ define('LOG_PATH', 'app_logs/');
 
 define('LOG_PROCESS_INCOMING','process_incoming.log');
 define('LOG_SMS_FOR_NON_PAUSE', 'processed_sms_at_valid_time.log');
+define('LOG_FOR_EMAIL_SENT', 'processed_email_messages.log');
 
 /** *************** End: Set the Log File Names ***************** */
