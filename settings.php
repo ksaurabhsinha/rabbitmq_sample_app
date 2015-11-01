@@ -19,4 +19,4 @@ define('PAUSE_START_TIME', '18:00:00');
 define('PAUSE_END_TIME', '6:00:00');
 /** ************** End: Pause Timings **************** */
 
-define('LOG_PATH', 'logs/');
+define('LOG_PATH', 'app_logs/');
