@@ -4,9 +4,13 @@ require_once 'bootstrap.php';
 
 use Rabbitmq as Rabbitmq;
 
+//Get the RabbitMQ instance
 $objRabbitMQ = new Rabbitmq\Rabbitmq(RMQ_HOST, RMQ_PORT, RMQ_USERNAME, RMQ_PASSWORD);
 
+//Create the Connection to the RabbitMQ
 $objRabbitMQ->connect();
+
+//Declare the Queue
 $channel = $objRabbitMQ->declareQueue('messages');
 
 $messageCounter = 1;
@@ -36,8 +40,8 @@ function processMessage($msg){
 
                 if(is_array($pauseTimeArray)) {
 
-                    $pauseStartTime = $pauseTimeArray['pause_start_time'];
-                    $pauseEndTime = $pauseTimeArray['pause_end_time'];
+                    $pauseStartTime = strtotime($pauseTimeArray['pause_start_time']);
+                    $pauseEndTime = strtotime($pauseTimeArray['pause_end_time']);
 
                     $presentTime = strtotime(date('Y-m-d H:i:s'));
 

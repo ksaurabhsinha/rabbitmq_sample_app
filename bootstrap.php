@@ -1,7 +1,7 @@
 <?php
 
 //Set the default timezone to UTC
-date_default_timezone_set('UTC');
+date_default_timezone_set('Asia/Kolkata');
 
 require_once('app/Autoloader.php');     //This is the Autoloader for the Application level Classes
 require_once __DIR__ . '/vendor/autoload.php';      //This is the Autoloader for the Vendor Packages
