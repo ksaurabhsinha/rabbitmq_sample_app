@@ -9,8 +9,8 @@ define('RMQ_PASSWORD', 'guest');
 
 /** ************** Start: MailTrap Credentials ********** */
 define('MAILTRAP_HOST', 'mailtrap.io');
-define('MAILTRAP_USERNAME', '48812e3a42fcc714d');
-define('MAILTRAP_PASSWORD', '4b2647cb61303f');
+define('MAILTRAP_USERNAME', 'YOUR_USERNAME_HERE');
+define('MAILTRAP_PASSWORD', 'YOUR_PASSWORD_HERE');
 define('MAILTRAP_PORT', '25');
 /** ************** End: MailTrap Credentials ********** */
 
