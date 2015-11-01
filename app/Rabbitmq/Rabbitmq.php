@@ -68,7 +68,7 @@ class Rabbitmq implements RabbitBridge{
 
         $this->channel->queue_declare($this->queueName, false, false, false, false);
 
-        return true;
+        return $this->channel;
 
     }
 

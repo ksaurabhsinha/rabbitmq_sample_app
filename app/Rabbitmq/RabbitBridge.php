@@ -35,4 +35,5 @@ interface RabbitBridge {
      */
     function publish($data, $opsArray);
 
+
 }
