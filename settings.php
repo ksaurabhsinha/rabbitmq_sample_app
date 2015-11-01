@@ -20,3 +20,11 @@ define('PAUSE_END_TIME', '6:00:00');
 /** ************** End: Pause Timings **************** */
 
 define('LOG_PATH', 'app_logs/');
+
+
+/** *************** Start: Set the Log File Names ***************** */
+
+define('LOG_PROCESS_INCOMING','process_incoming.log');
+define('LOG_SMS_FOR_NON_PAUSE', 'processed_sms_at_valid_time.log');
+
+/** *************** End: Set the Log File Names ***************** */

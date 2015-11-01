@@ -1,9 +1,7 @@
 <?php
 
-
 require_once 'bootstrap.php';
 
-//use PhpAmqpLib\Connection\AMQPConnection;
 use Rabbitmq as Rabbitmq;
 
 $objRabbitMQ = new Rabbitmq\Rabbitmq(RMQ_HOST, RMQ_PORT, RMQ_USERNAME, RMQ_PASSWORD);
@@ -17,6 +15,7 @@ function processMessage($msg){
 
     global $messageCounter;
     echo "Processing Message Number = $messageCounter. Press CTRL+C to stop processing\n";
+
     $messageCounter++;
 
     if(isset($msg)) {
@@ -33,23 +32,34 @@ function processMessage($msg){
             }
             else if ($dataArray['type'] = 'sms') {
 
-                $pauseStartTime = strtotime(date('Y-m-d ' . PAUSE_START_TIME));
-                $pauseEndTime = strtotime(date('Y-m-d ' . PAUSE_END_TIME));
-                $presentTime = strtotime(date('Y-m-d H:i:s'));
+                $pauseTimeArray = getPauseTimings(PAUSE_START_TIME, PAUSE_END_TIME);
 
-                if($presentTime > $pauseStartTime && $presentTime < $pauseEndTime) {
+                if(is_array($pauseTimeArray)) {
 
-                    global $objRabbitMQ;
+                    $pauseStartTime = $pauseTimeArray['pause_start_time'];
+                    $pauseEndTime = $pauseTimeArray['pause_end_time'];
 
-                    //Add this SMS to the custom SMS queue, to be processed at the perfect time
-                    $objRabbitMQ->declareQueue('sms_queue');
-                    $objRabbitMQ->publish($msg->body, array('delivery_mode' => 2));
+                    $presentTime = strtotime(date('Y-m-d H:i:s'));
 
+                    if($presentTime > $pauseStartTime && $presentTime < $pauseEndTime) {
+
+                        global $objRabbitMQ;
+
+                        //Add this SMS to the custom SMS queue, to be processed at the perfect time
+                        $objRabbitMQ->declareQueue('sms_queue');
+                        $objRabbitMQ->publish($msg->body, array('delivery_mode' => 2));
+
+                    }
+                    else {
+
+                        writeLog($dataArray, LOG_SMS_FOR_NON_PAUSE);
+
+                    }
 
                 }
                 else {
 
-                    writeLog($dataArray, 'processed_sms_at_valid_time.log');
+                    writeLog('Invalid Pause timings', LOG_PROCESS_INCOMING);
 
                 }
 
@@ -59,11 +69,11 @@ function processMessage($msg){
 
         }
         else{
-            writeLog('Invalid JSON', 'process_incoming.log');
+            writeLog('Invalid JSON', LOG_PROCESS_INCOMING);
         }
     }
     else{
-        writeLog('Invalid Message Parameter in Callback', 'process_incoming.log');
+        writeLog('Invalid Message Parameter in Callback', LOG_PROCESS_INCOMING);
     }
 }
 

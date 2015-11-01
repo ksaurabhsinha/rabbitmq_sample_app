@@ -24,3 +24,48 @@ function writeLog($logArray, $path) {
     error_log($err, 3, LOG_PATH . $path);
 
 }
+
+/**
+ * @param $startTime
+ * @param $endTime
+ *
+ * @return array
+ */
+function getPauseTimings($startTime, $endTime) {
+
+    $startTimeArray = explode(":", $startTime);
+    $endTimeArray = explode(":", $endTime);
+
+    $pauseStartDatetime = date('Y-m-d ' . PAUSE_START_TIME);
+
+    $isSameDay = true;
+
+    if($startTimeArray[0] == $endTimeArray[0]){
+
+        $isSameDay = true;
+
+    }
+    else {
+        if($startTimeArray[0] > $endTimeArray[0]) {
+            $isSameDay = false;
+        }
+        else {
+            $isSameDay = true;
+        }
+    }
+
+    if($isSameDay === false) {
+        $endDay = date('Y-m-d', strtotime("+1 days"));
+    }
+    else {
+        $endDay = date('Y-m-d');
+    }
+
+    $pauseEndDatetime = $endDay . " " . PAUSE_END_TIME;
+
+    $pauseTimeArray = array('pause_start_time' => $pauseStartDatetime,
+                            'pause_end_time' => $pauseEndDatetime);
+
+    return $pauseTimeArray;
+
+}
