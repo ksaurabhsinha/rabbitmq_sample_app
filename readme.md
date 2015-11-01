@@ -12,3 +12,8 @@ This is the a sample app to describe the working with RabbitMQ and Swift Mailer
 <ul>
 <li><b>settings.php</b> - We can change the settings value for the app</li>
 </ul>
+
+<b>App & SMS Logs</b>
+<ul>
+<li><b>/app_logs/</b> - Logs for the application error and SMS sent can be found here.</li>
+</ul>
