@@ -42,37 +42,3 @@ function addDummyMessageToIncomingQueue($messageArray, $numOfMessage = 10) {
 //Create the queue with Dummy incoming values
 addDummyMessageToIncomingQueue($messageArray, 10);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//var_dump($objRabbitMQ);
-/*
-$transport = Swift_SmtpTransport::newInstance('mailtrap.io', 25)
-    ->setUsername('48812e3a42fcc714d')
-    ->setPassword('4b2647cb61303f')
-;
-
-$mailer = Swift_Mailer::newInstance($transport);
-
-// Create a message
-$message = Swift_Message::newInstance('Wonderful Subject')
-    ->setFrom(array('saurabh@saurabhsinha.in' => 'Kumar Saurabh Sinha'))
-    ->setTo(array('sinha.ksaurabh@gmail.com' => 'Saurabh Sinha'))
-    ->setBody('Here is the message itself')
-;
-
-// Send the message
-$result = $mailer->send($message);
-
-*/

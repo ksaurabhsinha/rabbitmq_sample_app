@@ -20,6 +20,8 @@ $objSwiftTransport = Swift_SmtpTransport::newInstance(MAILTRAP_HOST, MAILTRAP_PO
                                         ->setPassword(MAILTRAP_PASSWORD);
 $objSwiftMailer = Swift_Mailer::newInstance($objSwiftTransport);
 
+echo "Ready to Process! Press CTRL+C to stop processing \n \n";
+
 function processMessage($msg){
 
     global $messageCounter, $objSwiftMailer;

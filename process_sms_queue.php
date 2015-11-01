@@ -15,6 +15,8 @@ $channel = $objRabbitMQ->declareQueue('sms_queue');
 
 $messageCounter = 1;
 
+echo "Ready to Process! Press CTRL+C to stop processing \n \n";
+
 function processMessage($msg){
 
     global $messageCounter;
